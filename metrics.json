@@ -1,0 +1,212 @@
+{
+  "metric_alerts_hostpool": {
+    "AVD-HostPool-VM-Available-Memory-LessThan-1GB": {
+      "aggregation": "Average",
+      "description": "Potential performance issues …",
+      "frequency": "PT1M",
+      "metric_name": "Available Memory Bytes",
+      "operator": "LessThanOrEqual",
+      "severity": 1,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of AVD session host VMs.",
+      "target_resource_type": "microsoft.compute/virtualmachines",
+      "threshold": 1073741824,
+      "window_size": "PT5M",
+      "dimensions": []
+    },
+    "AVD-HostPool-VM-Available-Memory-LessThan-2GB": {
+      "aggregation": "Average",
+      "description": "Potential performance issues for users on the same host due to moderately low memory. Investigate session host memory usage per user and/or memory requirements and adjust if/as needed for the hostpool. Check user active vs. disconnected status.",
+      "frequency": "PT1M",
+      "metric_name": "Available Memory Bytes",
+      "operator": "LessThanOrEqual",
+      "severity": 2,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of AVD session host VMs.",
+      "target_resource_type": "microsoft.compute/virtualmachines",
+      "threshold": 2147483648,
+      "window_size": "PT5M",
+      "dimensions": []
+    },
+    "AVD-HostPool-VM-High-CPU-85-Percent": {
+      "aggregation": "Average",
+      "description": "Potential performance issues for users on the same host due to moderately limited CPU (Avarage over 5 mins.) Investigate session host CPU usage per user and/or CPU requirements and adjust if/as needed for the hostpool. Check user active vs. disconnected status.",
+      "frequency": "PT5M",
+      "metric_name": "Percentage CPU",
+      "operator": "GreaterThan",
+      "severity": 2,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of AVD session host VMs.",
+      "target_resource_type": "microsoft.compute/virtualmachines",
+      "threshold": 85,
+      "window_size": "PT15M",
+      "dimensions": []
+    },
+    "AVD-HostPool-VM-High-CPU-95-Percent": {
+      "aggregation": "Average",
+      "description": "Potential performance issues for users on the same host due to critically limited CPU (Avarage over 5 mins.) Investigate session host CPU usage per user and/or CPU requirements and adjust if/as needed for the hostpool. Check user active vs. disconnected status.",
+      "frequency": "PT5M",
+      "metric_name": "Percentage CPU",
+      "operator": "GreaterThan",
+      "severity": 1,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of AVD session host VMs.",
+      "target_resource_type": "microsoft.compute/virtualmachines",
+      "threshold": 95,
+      "window_size": "PT15M",
+      "dimensions": []
+    },
+    "AVD-HostPool-VM-OSDisk-Bandwidth-Average-Consumed-85-Percent": {
+      "aggregation": "Average",
+      "description": "The OS Disk is near it's allowed IO maximum based on the Disk SKU within hostpool. Consider review of what applications are possibly causing excessive disk activity and potentially move to a larger or premium disk SKU.",
+      "frequency": "PT5M",
+      "metric_name": "OS Disk Bandwidth Consumed Percentage",
+      "operator": "GreaterThanOrEqual",
+      "severity": 2,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of AVD session host VMs.",
+      "target_resource_type": "microsoft.compute/virtualmachines",
+      "threshold": 85,
+      "window_size": "PT15M",
+      "dimensions": [
+        {
+          "name": "LUN",
+          "operator": "Include",
+          "values": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "AVD-HostPool-VM-OSDisk-Bandwidth-Average-Consumed-95-Percent": {
+      "aggregation": "Average",
+      "description": "The OS Disk is nearing it's allowed IO maximum based on the Disk SKU within hostpool. Consider review of what applications are possibly causing excessive disk activity and potentially move to a larger or premium disk SKU.",
+      "frequency": "PT5M",
+      "metric_name": "OS Disk Bandwidth Consumed Percentage",
+      "operator": "GreaterThanOrEqual",
+      "severity": 1,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of AVD session host VMs.",
+      "target_resource_type": "microsoft.compute/virtualmachines",
+      "threshold": 95,
+      "window_size": "PT15M",
+      "dimensions": [
+        {
+          "name": "LUN",
+          "operator": "Include",
+          "values": [
+            "*"
+          ]
+        }
+      ]
+    }
+  },
+  "metric_alerts_storage_account": {
+    "AVD-Storage-Azure-Files-Availability": {
+      "aggregation": "Average",
+      "description": "This could indicate storage is unavailable for user Profiles or Apps using MSIX App Attach, or there are network issues. Check the Azure Storage service health and network connectivity.",
+      "frequency": "PT5M",
+      "metric_name": "Availability",
+      "operator": "LessThanOrEqual",
+      "severity": 1,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of storage account.",
+      "target_resource_type": "Microsoft.Storage/storageAccounts",
+      "threshold": 99,
+      "window_size": "PT5M",
+      "dimensions": []
+    },
+    "AVD-Storage-Over-50ms-Latency-Between-Client-and-Storage": {
+      "aggregation": "Average",
+      "description": "This could indicate a lag or poor performance for user Profiles or Apps using MSIX App Attach.\nThis is a total latency from end to end between the Host VM and Storage to include network.\nFor additional details on troubleshooting see:\n\"https://learn.microsoft.com/en-us/azure/storage/files/storage-troubleshooting-files-performance#very-high-latency-for-requests\"",
+      "frequency": "PT5M",
+      "metric_name": "SuccessE2ELatency",
+      "operator": "GreaterThan",
+      "severity": 2,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of storage account.",
+      "target_resource_type": "Microsoft.Storage/storageAccounts",
+      "threshold": 50,
+      "window_size": "PT15M",
+      "dimensions": []
+    },
+    "AVD-Storage-Over-100ms-Latency-Between-Client-and-Storage": {
+      "aggregation": "Average",
+      "description": "This could indicate a lag or poor performance for user Profiles or Apps using MSIX App Attach.\nThis is a total latency from end to end between the Host VM and Storage to include network.\nFor additional details on troubleshooting see:\n\"https://learn.microsoft.com/en-us/azure/storage/files/storage-troubleshooting-files-performance#very-high-latency-for-requests\"",
+      "frequency": "PT5M",
+      "metric_name": "SuccessE2ELatency",
+      "operator": "GreaterThan",
+      "severity": 1,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of storage account.",
+      "target_resource_type": "Microsoft.Storage/storageAccounts",
+      "threshold": 100,
+      "window_size": "PT15M",
+      "dimensions": []
+    },
+    "AVD-Storage-Over-50ms-Latency-for-Storage-Account": {
+      "aggregation": "Average",
+      "description": "This could indicate a lag or poor performance for user Profiles or Apps using MSIX App Attach.\nThis alert is specific to the Storage Account itself and does not include network latency.\nFor additional details on troubleshooting see:\n\"https://learn.microsoft.com/en-us/azure/storage/files/storage-troubleshooting-files-performance#very-high-latency-for-requests\"",
+      "frequency": "PT5M",
+      "metric_name": "SuccessServerLatency",
+      "operator": "GreaterThan",
+      "severity": 2,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of storage account.",
+      "target_resource_type": "Microsoft.Storage/storageAccounts",
+      "threshold": 50,
+      "window_size": "PT15M",
+      "dimensions": []
+    },
+    "AVD-Storage-Over-100ms-Latency-for-Storage-Account": {
+      "aggregation": "Average",
+      "description": "This could indicate a lag or poor performance for user Profiles or Apps using MSIX App Attach.\nThis alert is specific to the Storage Account itself and does not include network latency.\nFor additional details on troubleshooting see:\n\"https://learn.microsoft.com/en-us/azure/storage/files/storage-troubleshooting-files-performance#very-high-latency-for-requests\"",
+      "frequency": "PT5M",
+      "metric_name": "SuccessServerLatency",
+      "operator": "GreaterThan",
+      "severity": 1,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of storage account.",
+      "target_resource_type": "Microsoft.Storage/storageAccounts",
+      "threshold": 100,
+      "window_size": "PT15M",
+      "dimensions": []
+    },
+    "AVD-Storage-Throttling-Due-to-High-IOPs": {
+      "aggregation": "Total",
+      "description": "This indicates you may be maxing out the allowed IOPs. Investigate the storage account and consider increasing the performance tier or scaling out.",
+      "frequency": "PT5M",
+      "metric_name": "Transactions",
+      "operator": "GreaterThanOrEqual",
+      "severity": 2,
+      "target_resource_location": "uksouth",
+      "_comment": "Change target_resource_location to the location of storage account.",
+      "target_resource_type": "Microsoft.Storage/storageAccounts/fileServices",
+      "threshold": 1,
+      "window_size": "PT15M",
+      "dimensions": [
+        {
+          "name": "ResponseType",
+          "operator": "Include",
+          "values": [
+            "SuccessWithThrottling",
+            "SuccessWithShareIopsThrottling",
+            "ClientShareIopsThrottlingError"
+          ]
+        },
+        {
+          "name": "FileShare",
+          "operator": "Include",
+          "values": [
+            "SuccessWithShareEgressThrottling",
+            "SuccessWithShareIngressThrottling",
+            "SuccessWithShareIopsThrottling",
+            "ClientShareEgressThrottlingError",
+            "ClientShareIngressThrottlingError",
+            "ClientShareIopsThrottlingError"
+          ]
+        }
+      ]
+    }
+  }
+}
