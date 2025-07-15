@@ -358,7 +358,7 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "custom_log_search" {
 
 # Create service health alert rules.
 resource "azurerm_monitor_activity_log_alert" "avd_service_health_ala" {
-  name                = AVD-Service-Health-Alert
+  name                = "AVD-Service-Health-Alert"
   resource_group_name = "rg-p-uks-mon-001" # Change this to a resource group where log analytics workspace is. This resource group shall host the alert rules.
   location            = "global"           # Activity Log Alerts are global
   enabled             = true
@@ -368,12 +368,12 @@ resource "azurerm_monitor_activity_log_alert" "avd_service_health_ala" {
   criteria {
     category = "ServiceHealth"
     service_health {
-      events    = ["Incident", "Maintenance", "Security", "ActionReqquired"]
-      locations = [uksouth] # Change this to the location where the service health alert should be created.
+      events    = ["Incident", "Maintenance", "Security", "ActionRequired"]
+      locations = ["uksouth"] # Change this to the location where the service health alert should be created.
       services  = ["Windows Virtual Desktop"]
     }
   }
   action {
-    action_group_id = azurerm_monitor_action_group.avd_service_health_ag.id
+    action_group_id = azurerm_monitor_action_group.avd_alerts_ag.id
   }
 }
